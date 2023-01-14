@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/cupertino.dart';
-import 'package:invited/widgets/small_txt.dart';
+import 'package:invited_project/widgets/small_txt.dart';
 
 import '../utils/colors.dart';
 

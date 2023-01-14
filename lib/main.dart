@@ -1,22 +1,22 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:invited/pages/home/main_home_page.dart';
+import 'package:invited_project/pages/home/home_page.dart';
 
-Future<void> main() async
-{
-  WidgetsFlutterBinding.ensureInitialized();
-  runApp(MyApp());
 
+void main() {
+  runApp(const MyApp());
 }
-class MyApp extends StatelessWidget
-{
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomePage(),
-    );
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Invited',
+        theme: ThemeData(
+          primarySwatch: Colors.green,
+        ),
+        home: const HomePage());
   }
 }

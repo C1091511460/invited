@@ -1,16 +1,11 @@
-
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../../utils/colors.dart';
 import '../../widgets/app_icon.dart';
 import '../../widgets/big_txt.dart';
 import '../../widgets/expandable_text.dart';
 import '../../widgets/icon_and_text.dart';
-import '../../widgets/slide_right_route.dart';
 import '../../widgets/small_txt.dart';
-import '../home/main_home_page.dart';
+
 
 class PostPage extends StatelessWidget {
   final String tittle;
@@ -136,9 +131,9 @@ class PostPage extends StatelessWidget {
                 child: Row(
                   children: [
                     IconButton(
-                      icon: Icon(Icons.arrow_back_ios),
+                      icon: const Icon(Icons.arrow_back_ios),
                       onPressed: () {
-                        Navigator.push(context, SlideRightRoute(page: HomePage()));
+                        Navigator.of(context).pop();
                       },
                     ),
                     Expanded(
@@ -178,7 +173,7 @@ class PostPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15),
                 color: AppColors.homegreen),
             child: IconButton(
-              icon: Icon(Icons.mail_sharp),
+              icon: const Icon(Icons.mail_sharp),
               iconSize: 40,
               onPressed: () {  },
             ),

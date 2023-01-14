@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+
 import '../../widgets/slide_right_route.dart';
-import 'main_home_page.dart';
+import 'home_page.dart';
+
+
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
 
