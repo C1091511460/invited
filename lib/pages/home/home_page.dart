@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:invited_project/pages/home/post_page.dart';
+import 'package:invited_project/pages/profile/profile_page.dart';
+import 'package:invited_project/pages/search/search_page.dart';
 
 import '../../data/sql_helper.dart';
 import '../../widgets/big_txt.dart';
 import '../../widgets/icon_and_text.dart';
 import '../../widgets/small_txt.dart';
-
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -16,8 +17,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-  int _selectedIndex = 1;
 
   List<Map<String, dynamic>> _journals = [];
 
@@ -59,12 +58,6 @@ class _HomePageState extends State<HomePage> {
       _remarkController.text = existingJournal['remark'];
     }
 
-    void _onItemTapped(int index) {
-      setState(() {
-        _selectedIndex = index;
-      });
-
-    }
 
     showModalBottomSheet(
         context: context,

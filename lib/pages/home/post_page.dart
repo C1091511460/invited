@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../utils/colors.dart';
 import '../../widgets/app_icon.dart';
 import '../../widgets/big_txt.dart';
 import '../../widgets/expandable_text.dart';
@@ -170,8 +169,7 @@ class PostPage extends StatelessWidget {
               right: 5,
             ),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: AppColors.homegreen),
+                borderRadius: BorderRadius.circular(15),),
             child: IconButton(
               icon: const Icon(Icons.mail_sharp),
               iconSize: 40,
