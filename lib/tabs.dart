@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:invited_project/pages/home/home_page.dart';
-import 'package:invited_project/pages/mail_page.dart';
+import 'package:invited_project/pages/mail/mail_page.dart';
 import 'package:invited_project/pages/profile/profile_page.dart';
 import 'package:invited_project/pages/search/search_page.dart';
 
