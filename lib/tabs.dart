@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:invited_project/pages/home/home_page.dart';
 import 'package:invited_project/pages/mail/mail_page.dart';
 import 'package:invited_project/pages/profile/profile_page.dart';
-import 'package:invited_project/pages/search/search_page.dart';
+
 
 class Tabs extends StatefulWidget {
   const Tabs({Key? key}) : super(key: key);
@@ -16,7 +16,6 @@ class _TabsState extends State<Tabs> {
 
   final List _pageList = [
     const HomePage(),
-    const SearchPage(),
     const MailPage(),
     const ProfilePage()
   ];
@@ -35,7 +34,6 @@ class _TabsState extends State<Tabs> {
         },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.search_rounded),label: "Search"),
           BottomNavigationBarItem(icon: Icon(Icons.mail_sharp),label: "Mail"),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
         ],

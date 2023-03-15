@@ -1,13 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:invited_project/pages/home/post_page.dart';
-import 'package:invited_project/pages/profile/profile_page.dart';
-import 'package:invited_project/pages/search/search_page.dart';
-
-import '../../data/sql_helper.dart';
+import '../../data/page_data.dart';
 import '../../widgets/big_txt.dart';
 import '../../widgets/icon_and_text.dart';
 import '../../widgets/small_txt.dart';
+import '../search/search_delegate.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -167,9 +165,6 @@ class _HomePageState extends State<HomePage> {
 
   void _deleteItem(int id) async {
     await SQLHelper.deleteItem(id);
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      content: Text('Successfully deleted a journal!'),
-    ));
     _refreshJournals();
   }
 
@@ -178,6 +173,15 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Invited'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search_rounded,size: 30,),
+            onPressed: () { 
+              showSearch(
+                  context: context,
+                  delegate: ItemSearchDelegate(),);
+            },
+          )],
       ),
       body: _isLoading
           ? const Center(
