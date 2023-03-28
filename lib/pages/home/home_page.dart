@@ -193,7 +193,7 @@ class _HomePageState extends State<HomePage> {
       drawer: Drawer(
           child: ListView(
             children: <Widget>[
-              DrawerHeader(
+              const DrawerHeader(
                 decoration: BoxDecoration(color: AppColors.homegreen),
                 child: Center(
                   child: SizedBox(

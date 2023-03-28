@@ -4,6 +4,17 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleURLTypes</key>
+    <array>
+    	<dict>
+    		<key>CFBundleTypeRole</key>
+    		<string>Editor</string>
+    		<key>CFBundleURLSchemes</key>
+    		<array>
+    			<string>com.googleusercontent.apps.692092370783-47hf9njnrrpq5bqd8p5qqe6hu2t1gi4j</string>
+    		</array>
+    	</dict>
+    </array>
 	<key>CFBundleDisplayName</key>
 	<string>Invited</string>
 	<key>CFBundleExecutable</key>
