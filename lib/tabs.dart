@@ -15,9 +15,8 @@ class _TabsState extends State<Tabs> {
   int _currentIndex = 0;
 
   final List _pageList = [
-    const HomePage(),
+    HomePage(),
     const MailPage(),
-    const ProfilePage()
   ];
 
   @override
@@ -35,7 +34,6 @@ class _TabsState extends State<Tabs> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.mail_sharp),label: "Mail"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
         ],
         selectedItemColor: Colors.green,
         unselectedItemColor: Colors.grey,

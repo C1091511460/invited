@@ -1,8 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart' as sql;
+import 'package:firebase_database/firebase_database.dart';
+
 
 class SQLHelper {
   static Future<void> createTables(sql.Database database) async {
+
+    final DatabaseReference fireBaseDB = FirebaseDatabase.instance.reference();
+
     await database.execute("""CREATE TABLE pages(
         id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
         title TEXT,

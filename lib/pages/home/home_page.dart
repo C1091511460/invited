@@ -1,20 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:invited_project/pages/home/post_page.dart';
+import 'package:invited_project/utils/colors.dart';
 import '../../data/page_data.dart';
 import '../../widgets/big_txt.dart';
 import '../../widgets/icon_and_text.dart';
 import '../../widgets/small_txt.dart';
+import '../profile/login_page.dart';
 import '../search/search_delegate.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+
+  final AuthRepository _authRepository = AuthRepository();
+
+  HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+
+  final AuthRepository _authRepository = AuthRepository();
 
   List<Map<String, dynamic>> _journals = [];
 
@@ -183,6 +190,42 @@ class _HomePageState extends State<HomePage> {
             },
           )],
       ),
+      drawer: Drawer(
+          child: ListView(
+            children: <Widget>[
+              DrawerHeader(
+                decoration: BoxDecoration(color: AppColors.homegreen),
+                child: Center(
+                  child: SizedBox(
+                    width: 60.0,
+                    height: 60.0,
+                    child: CircleAvatar(
+                      child: IconButton(
+                        icon: Icon(Icons.person),
+                        onPressed: null,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              ListTile(
+                leading: Icon(Icons.person),
+                title: Text('LOGIN'),
+                onTap: () async {
+                  final ok = await _authRepository.signInWithGoogle();
+                  if (ok) {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomePage(),
+                      ),
+                    );
+                  }
+                },
+              )
+            ],
+          )
+      ),
       body: _isLoading
           ? const Center(
         child: CircularProgressIndicator(),
@@ -275,7 +318,7 @@ class _HomePageState extends State<HomePage> {
                 Container(
                   margin: const EdgeInsets.only(
                     top: 100,
-                    left: 320,
+                    left: 310,
                   ),
                   child: Row(
                     children: [
