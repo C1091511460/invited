@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:invited_project/pages/drawer/drawer_page.dart';
 import 'package:invited_project/pages/home/post_page.dart';
 import 'package:invited_project/utils/colors.dart';
 import '../../data/page_data.dart';
@@ -10,8 +11,6 @@ import '../profile/login_page.dart';
 import '../search/search_delegate.dart';
 
 class HomePage extends StatefulWidget {
-
-  final AuthRepository _authRepository = AuthRepository();
 
   HomePage({Key? key}) : super(key: key);
 
@@ -191,40 +190,7 @@ class _HomePageState extends State<HomePage> {
           )],
       ),
       drawer: Drawer(
-          child: ListView(
-            children: <Widget>[
-              const DrawerHeader(
-                decoration: BoxDecoration(color: AppColors.homegreen),
-                child: Center(
-                  child: SizedBox(
-                    width: 60.0,
-                    height: 60.0,
-                    child: CircleAvatar(
-                      child: IconButton(
-                        icon: Icon(Icons.person),
-                        onPressed: null,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              ListTile(
-                leading: Icon(Icons.person),
-                title: Text('LOGIN'),
-                onTap: () async {
-                  final ok = await _authRepository.signInWithGoogle();
-                  if (ok) {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomePage(),
-                      ),
-                    );
-                  }
-                },
-              )
-            ],
-          )
+          child: DrawerPage()
       ),
       body: _isLoading
           ? const Center(
