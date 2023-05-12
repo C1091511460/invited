@@ -2,12 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:invited_project/pages/drawer/drawer_page.dart';
 import 'package:invited_project/pages/home/post_page.dart';
-import 'package:invited_project/utils/colors.dart';
 import '../../data/page_data.dart';
 import '../../widgets/big_txt.dart';
 import '../../widgets/icon_and_text.dart';
 import '../../widgets/small_txt.dart';
-import '../profile/login_page.dart';
 import '../search/search_delegate.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,8 +17,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-  final AuthRepository _authRepository = AuthRepository();
 
   List<Map<String, dynamic>> _journals = [];
 
@@ -47,6 +43,7 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _peopleController =  TextEditingController();
   final TextEditingController _budgetController =  TextEditingController();
   final TextEditingController _remarkController =  TextEditingController();
+  String dropdownValue = 'trip';
 
 
   void _showForm(int? id) async {
@@ -61,6 +58,7 @@ class _HomePageState extends State<HomePage> {
       _budgetController.text = existingJournal['budget'];
       _remarkController.text = existingJournal['remark'];
     }
+
 
 
     showModalBottomSheet(
@@ -90,6 +88,21 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(
                     height: 10,
                   ),
+                DropdownButton<String>(
+                  value: dropdownValue,
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownValue = newValue!;
+                    });
+                  },
+                  items: <String>['trip', 'sport', 'game', 'others']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
                   TextField(
                     controller: _positionController,
                     decoration: const InputDecoration(hintText: 'Position'),
@@ -157,14 +170,14 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _addItem() async {
     await SQLHelper.createItem(
-        _titleController.text, _positionController.text, _dateController.text, _peopleController.text, _budgetController.text, _remarkController.text);
+        _titleController.text,dropdownValue, _positionController.text, _dateController.text, _peopleController.text, _budgetController.text, _remarkController.text);
     _refreshJournals();
   }
 
 
   Future<void> _updateItem(int id) async {
     await SQLHelper.updateItem(
-        id, _titleController.text, _positionController.text, _dateController.text, _peopleController.text, _budgetController.text, _remarkController.text);
+        id, _titleController.text, dropdownValue, _positionController.text, _dateController.text, _peopleController.text, _budgetController.text, _remarkController.text);
     _refreshJournals();
   }
 

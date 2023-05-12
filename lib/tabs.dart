@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:invited_project/pages/home/home_page.dart';
 import 'package:invited_project/pages/mail/mail_page.dart';
-import 'package:invited_project/pages/profile/profile_page.dart';
-
+import 'package:invited_project/pages/post/post_page.dart';
 
 class Tabs extends StatefulWidget {
   const Tabs({Key? key}) : super(key: key);
@@ -16,6 +15,7 @@ class _TabsState extends State<Tabs> {
 
   final List _pageList = [
     HomePage(),
+    PostPage(),
     const MailPage(),
   ];
 
@@ -33,6 +33,7 @@ class _TabsState extends State<Tabs> {
         },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.add_circle),label: "Post"),
           BottomNavigationBarItem(icon: Icon(Icons.mail_sharp),label: "Mail"),
         ],
         selectedItemColor: Colors.green,

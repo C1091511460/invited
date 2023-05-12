@@ -1,16 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart' as sql;
-import 'package:firebase_database/firebase_database.dart';
 
 
 class SQLHelper {
   static Future<void> createTables(sql.Database database) async {
 
-    final DatabaseReference fireBaseDB = FirebaseDatabase.instance.reference();
-
     await database.execute("""CREATE TABLE pages(
         id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
         title TEXT,
+        type Text
         position TEXT,
         date TEXT,
         people TEXT,
@@ -31,10 +29,10 @@ class SQLHelper {
     );
   }
 
-  static Future<int> createItem(String title, String position, String date, String people, String budget, String remark) async {
+  static Future<int> createItem(String title,String type ,String position, String date, String people, String budget, String remark) async {
     final db = await SQLHelper.db();
 
-    final data = {'title': title, 'position': position, 'date': date, 'people': people, 'budget': budget, 'remark': remark};
+    final data = {'title': title,'type':type ,'position': position, 'date': date, 'people': people, 'budget': budget, 'remark': remark};
     final id = await db.insert('pages', data,
         conflictAlgorithm: sql.ConflictAlgorithm.replace);
     return id;
@@ -51,11 +49,12 @@ class SQLHelper {
   }
 
   static Future<int> updateItem(
-      int id, String title, String position, String date, String people, String budget, String remark) async {
+      int id, String title,String type ,String position, String date, String people, String budget, String remark) async {
     final db = await SQLHelper.db();
 
     final data = {
       'title': title,
+      'type':type,
       'position': position,
       'date': date,
       'people': people,

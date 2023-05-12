@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../utils/colors.dart';
 import '../home/home_page.dart';
-import '../profile/login_page.dart';
+import 'login_page.dart';
 
 class DrawerPage extends StatefulWidget {
   DrawerPage({Key? key}) : super(key: key);
@@ -13,7 +13,7 @@ class DrawerPage extends StatefulWidget {
 }
 
 class _DrawerPageState extends State<DrawerPage> {
-  final AuthRepository _authRepository = AuthRepository();
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -35,15 +35,10 @@ class _DrawerPageState extends State<DrawerPage> {
           leading: Icon(Icons.person),
           title: Text('LOGIN'),
           onTap: () async {
-            final ok = await _authRepository.signInWithGoogle();
-            if (ok) {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => HomePage(),
-                ),
-              );
-            }
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LoginPage()),
+            );
           },
         ),
       ],
