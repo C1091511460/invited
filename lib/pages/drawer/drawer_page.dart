@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:invited_project/pages/drawer/login_page.dart';
 
 import '../../utils/colors.dart';
-import '../home/home_page.dart';
-import 'login_page.dart';
 
 class DrawerPage extends StatefulWidget {
   DrawerPage({Key? key}) : super(key: key);
@@ -13,22 +12,21 @@ class DrawerPage extends StatefulWidget {
 }
 
 class _DrawerPageState extends State<DrawerPage> {
-
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: <Widget>[
         UserAccountsDrawerHeader(
           decoration: BoxDecoration(
-            color: AppColors.homegreen,
+
           ),
-          accountName: Text("Name"),
-          accountEmail: Text("Email"),
+          accountName: Text("Name",style: TextStyle(color: AppColors.SmallText),),
+          accountEmail: Text("Email",style: TextStyle(color: AppColors.SmallText),),
           currentAccountPicture: CircleAvatar(
 
           ),
           otherAccountsPictures: <Widget>[
-            Icon(Icons.edit, color: Colors.white),
+            Icon(Icons.edit, color: AppColors.SmallText),
           ],
         ),
         ListTile(

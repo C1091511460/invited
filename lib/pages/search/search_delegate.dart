@@ -2,13 +2,7 @@ import 'package:flutter/material.dart';
 
 class ItemSearchDelegate extends SearchDelegate{
   List<String> searchTerms = [
-    'Apple',
-    'Banana',
-    'Pear',
-    'Watermelons',
-    'Orange',
-    'Blueberries',
-    'Raspberries',
+
   ];
 
   @override
