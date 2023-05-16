@@ -8,6 +8,8 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  API api = API();
+
   final _formKey = GlobalKey<FormState>();
   late String _username;
   late int _age;
@@ -116,7 +118,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
                     // Do registration
-                    createUser(_username, _age, _selectedGender!, _email, _password);
+                    api.createUser(_username, _age, _selectedGender!, _email, _password);
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => LoginPage()),

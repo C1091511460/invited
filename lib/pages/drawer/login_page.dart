@@ -1,7 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:invited_project/pages/drawer/preference_page.dart';
 import 'package:invited_project/pages/drawer/register_page.dart';
-import 'package:invited_project/pages/home/home_page.dart';
 import 'package:invited_project/widgets/api.dart';
+
+import '../../tabs.dart';
+import '../../widgets/securestorage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -11,6 +16,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  API api = API();
   final _formKey = GlobalKey<FormState>();
   late String _emailController;
   late String _passwordController;
@@ -56,14 +62,49 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
-                      Login(_emailController, _passwordController);
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomePage()),
-                      );
+                      api.login(_emailController, _passwordController).then((response) async {
+                        if (response.statusCode == 200) {
+                          final Map<String, dynamic> data = json.decode(response.body);
+                          final auth_token = data['auth_token'];
+                          final secureStorage = SecureStorage();
+                          secureStorage.saveToken(auth_token);
+                          Map<String, dynamic>? userData = await api.fetchUserData(_emailController);
+
+                          if (userData != null) {
+                            await secureStorage.saveUserData(userData);
+                            final firstLogin = userData['first_login'] == 1;
+                            if (firstLogin) {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => PreferenceFormPage()),
+                              );
+                            } else {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => Tabs()),
+                              );
+                            }
+                          } else {
+                            // 处理获取用户数据失败的情况
+                            print('无法获取用户数据');
+                          }
+                        } else if (response.statusCode == 401) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Invalid email or password'),
+                            ),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Server Error'),
+                            ),
+                          );
+                        }
+                      });
                     }
                   },
-                  child: Text('Login'),
+                  child: Text('登入'),
                 ),
                 SizedBox(height: 16.0),
                 TextButton(
