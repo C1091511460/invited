@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../tabs.dart';
 import '../../widgets/api.dart';
 import '../../widgets/securestorage.dart';
 
@@ -37,7 +38,10 @@ class _PreferenceFormPageState extends State<PreferenceFormPage> {
       }
 
       // Navigate back to the previous screen
-      Navigator.pop(context);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => Tabs()),
+      );
     }
   }
 
