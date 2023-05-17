@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 class API {
   Future<http.Response> createUser(
       String name, int age, String gender, String email, String password) {
-    final url = Uri.parse('http://61.61.81.242:3000/api/register');
+    final url = Uri.parse('https://7957-61-61-81-242.jp.ngrok.io/api/register');
     final body = jsonEncode({
       'name': name,
       'age': age,
@@ -17,7 +17,7 @@ class API {
   }
 
   Future<http.Response> login(String email, String password) {
-    final url = Uri.parse('http://61.61.81.242:3000/api/login');
+    final url = Uri.parse('https://7957-61-61-81-242.jp.ngrok.io/api/login');
     final body = jsonEncode({'email': email, 'password': password});
     final headers = {'Content-Type': 'application/json'};
     return http.post(url, headers: headers, body: body);
@@ -25,7 +25,7 @@ class API {
 
   Future<http.Response> setFirstLoginStatus(
       String userId, bool isFirstLogin) async {
-    final url = Uri.parse('http://61.61.81.242:3000/api/setFirstLoginStatus');
+    final url = Uri.parse('https://7957-61-61-81-242.jp.ngrok.io/api/setFirstLoginStatus');
     final body = jsonEncode({'user_id': userId, 'isFirstLogin': isFirstLogin});
     final headers = {'Content-Type': 'application/json'};
 
@@ -34,7 +34,7 @@ class API {
   }
 
   Future<void> savePreferences(String userId, List<String> preferences) async {
-    final url = Uri.parse('http://61.61.81.242:3000/api/savePreferences');
+    final url = Uri.parse('https://7957-61-61-81-242.jp.ngrok.io/api/savePreferences');
     final body = {
       'userId': userId,
       'preferences': preferences,
@@ -56,7 +56,7 @@ class API {
 
   Future<List<String>> getUserPreferences(String userId) async {
     final url = Uri.parse(
-        'http://61.61.81.242:3000/api/getUserPreferences?user_id=$userId');
+        'https://7957-61-61-81-242.jp.ngrok.io/api/getUserPreferences?user_id=$userId');
 
     final response = await http.get(url);
     if (response.statusCode == 200) {
@@ -68,7 +68,7 @@ class API {
   }
 
   Future<Map<String, dynamic>?> fetchUserData(String email) async {
-    final url = Uri.parse('http://61.61.81.242:3000/api/data?email=$email');
+    final url = Uri.parse('https://7957-61-61-81-242.jp.ngrok.io/api/data?email=$email');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -87,7 +87,7 @@ class API {
       String location,
       String content,
       String author) async {
-    var url = Uri.parse('http://61.61.81.242:3000/api/posts');
+    var url = Uri.parse('https://7957-61-61-81-242.jp.ngrok.io/api/posts');
     final headers = {'Content-Type': 'application/json'};
 
     // 要傳送的資料
@@ -108,7 +108,7 @@ class API {
   static Future<List<dynamic>> fetchPosts(int currentPage, int perPage) async {
     try {
       final url = Uri.parse(
-          'http://61.61.81.242:3000/api/getposts?page=$currentPage&per_page=$perPage');
+          'https://7957-61-61-81-242.jp.ngrok.io/api/getposts?page=$currentPage&per_page=$perPage');
       final response = await http.get(url);
 
       if (response.statusCode == 200) {
