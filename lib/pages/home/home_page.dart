@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
       isLoading = true;
     });
 
-    final fetchedPosts = await API.fetchPosts(currentPage, perPage);
+    final fetchedPosts = await api.fetchPosts(currentPage, perPage);
 
     setState(() {
       posts.addAll(fetchedPosts);
