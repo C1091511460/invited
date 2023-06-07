@@ -22,13 +22,11 @@ class PostDetailPage extends StatelessWidget {
           children: [
             Row(
               children: [
-                // 添加作者头像或默认图案
                 CircleAvatar(
                   radius: 24.0,
-                  backgroundColor: Colors.grey, // 使用灰色作为默认图案的背景颜色
+                  backgroundColor: Colors.grey,
                 ),
                 SizedBox(width: 8.0),
-                // 添加作者名称
                 Text(
                   post['author'],
                   style: TextStyle(fontSize: 16),

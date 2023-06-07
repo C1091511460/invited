@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:invited_project/pages/home/home_page.dart';
 import 'package:invited_project/pages/post/post_page.dart';
-import 'package:invited_project/pages/mail/mail_page.dart';
+import 'package:invited_project/pages/mail/chat_room_page.dart';
 import 'package:invited_project/widgets/BottomNavigationBar.dart';
 
 class Tabs extends StatefulWidget {
@@ -36,7 +36,7 @@ class _TabsState extends State<Tabs> {
       case 1:
         return PostPage();
       case 2:
-        return MailPage();
+        return ChatRoomPage();
       default:
         return Container();
     }

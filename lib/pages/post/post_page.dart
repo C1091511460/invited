@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:invited_project/widgets/api.dart';
 import 'package:intl/intl.dart';
@@ -27,8 +25,7 @@ class _PostPageState extends State<PostPage> {
     final userData = await secureStorage.readUserData();
     String title = titleController.text;
     String type = dropdownValue;
-    String date =
-        DateFormat('yyyy-MM-dd').format(DateTime.now()); // 使用 DateFormat 格式化日期
+    String date = dateController.text;;
     String time = timeController.text;
     String budget = budgetController.text;
     String location = locationController.text;
@@ -51,13 +48,41 @@ class _PostPageState extends State<PostPage> {
       );
     }
 
-    // 清除輸入欄位
     titleController.clear();
     dateController.clear();
     timeController.clear();
     budgetController.clear();
     locationController.clear();
     contentController.clear();
+  }
+
+  Future<void> selectDate() async {
+    final DateTime? selectedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
+    );
+
+    if (selectedDate != null) {
+      String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate);
+      setState(() {
+        dateController.text = formattedDate;
+      });
+    }
+  }
+
+  Future<void> selectTime() async {
+    final TimeOfDay? selectedTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+
+    if (selectedTime != null) {
+      setState(() {
+        timeController.text = selectedTime.format(context);
+      });
+    }
   }
 
   @override
@@ -87,7 +112,7 @@ class _PostPageState extends State<PostPage> {
               decoration: InputDecoration(
                 labelText: 'Type',
               ),
-              items: <String>['Trip', 'Sport', 'Game', 'Others']
+              items: <String>['Trip', 'Sport', 'Game']
                   .map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
@@ -104,31 +129,21 @@ class _PostPageState extends State<PostPage> {
                       hintText: 'Date',
                     ),
                     controller: dateController,
-                    onTap: () {
-                      showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(2000),
-                        lastDate: DateTime(2100),
-                      ).then((selectedDate) {
-                        if (selectedDate != null) {
-                          String formattedDate =
-                              DateFormat('yyyy-MM-dd').format(selectedDate);
-                          setState(() {
-                            dateController.text = formattedDate;
-                          });
-                        }
-                      });
-                    },
+                    onTap: selectDate,
                   ),
                 ),
                 SizedBox(width: 16),
                 Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Time',
+                  child: GestureDetector(
+                    onTap: selectTime,
+                    child: AbsorbPointer(
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Time',
+                        ),
+                        controller: timeController,
+                      ),
                     ),
-                    controller: timeController,
                   ),
                 ),
               ],
