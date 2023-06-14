@@ -1,61 +1,51 @@
 import 'package:flutter/material.dart';
 
 class ChatRoomPage extends StatefulWidget {
-  const ChatRoomPage({Key? key}) : super(key: key);
-
   @override
   _ChatRoomPageState createState() => _ChatRoomPageState();
 }
 
 class _ChatRoomPageState extends State<ChatRoomPage> {
-  List<String> messages = [];
-
-  TextEditingController messageController = TextEditingController();
-
-  void sendMessage() {
-    String message = messageController.text;
-    if (message.isNotEmpty) {
-      setState(() {
-        messages.add(message);
-      });
-      messageController.clear();
-    }
-  }
+  List<ChatMessage> _chatMessages = [];
+  TextEditingController _messageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chat'),
+        title: Text('Chat Room'),
       ),
       body: Column(
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: messages.length,
+              itemCount: _chatMessages.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(messages[index]),
+                  title: Text(_chatMessages[index].sender),
+                  subtitle: Text(_chatMessages[index].message),
                 );
               },
             ),
           ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 16),
+          Divider(),
+          Padding(
+            padding: EdgeInsets.all(8.0),
             child: Row(
               children: [
                 Expanded(
                   child: TextField(
-                    controller: messageController,
+                    controller: _messageController,
                     decoration: InputDecoration(
-                      hintText: 'Enter your message',
+                      hintText: 'Type your message...',
                     ),
                   ),
                 ),
-                SizedBox(width: 16),
-                ElevatedButton(
-                  onPressed: sendMessage,
-                  child: Text('Send'),
+                IconButton(
+                  icon: Icon(Icons.send),
+                  onPressed: () {
+                    _sendMessage();
+                  },
                 ),
               ],
             ),
@@ -64,4 +54,28 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
       ),
     );
   }
+
+  void _sendMessage() {
+    String message = _messageController.text;
+    String sender = 'User'; // Replace with actual user name or ID
+    DateTime timestamp = DateTime.now();
+
+    ChatMessage chatMessage = ChatMessage(sender: sender, message: message, timestamp: timestamp);
+    setState(() {
+      _chatMessages.add(chatMessage);
+      _messageController.clear();
+    });
+  }
+}
+
+class ChatMessage {
+  final String sender;
+  final String message;
+  final DateTime timestamp;
+
+  ChatMessage({
+    required this.sender,
+    required this.message,
+    required this.timestamp,
+  });
 }
