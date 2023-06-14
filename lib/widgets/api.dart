@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 
 class API {
 
-  String ngrokUrl = "440b-61-61-81-242.jp.ngrok.io";
+  String ngrokUrl = "1849-61-61-81-242.jp.ngrok.io";
 
   Future<http.Response> createUser(
       String name, int age, String gender, String email, String password) {
